@@ -45,10 +45,10 @@ String baseUrl = 'https://akb48-sousenkyo.jp/akb/'
 
 selenium = new WebDriverBackedSelenium(driver, baseUrl)
 
-result_vote_failed = new File(resultDir + '\\result-vote-failed.log')
 result_vote_ok = new File(resultDir + '\\result-vote-ok.log')
 result_vote_already = new File(resultDir + '\\result-vote-already.log')
 result_vote_error = new File(resultDir + '\\result-vote-error.log')
+result_vote_failed = new File(resultDir + '\\result-vote-failed.log')
 
 for (def index : (0..codeVotes.getRowNumbers() - 1)) {
 	
@@ -80,7 +80,8 @@ for (def index : (0..codeVotes.getRowNumbers() - 1)) {
 		
 		file.text = pageSource
 		
-		result_vote_ok.append('\n'+codeVoteGroup)
+		result_vote_ok.append('\n'+codeVotes.internallyGetValue('s1', index) + "," + codeVotes.internallyGetValue('s2', index))
+
 		
 	} else if(pageSource.contains("エラーが発生しました。")){ // An error occurred.	
 		
@@ -100,7 +101,7 @@ for (def index : (0..codeVotes.getRowNumbers() - 1)) {
 		
 		file.text = pageSource
 		
-		result_vote_already.append('\n'+codeVoteGroup)
+		result_vote_already.append('\n'+codeVotes.internallyGetValue('s1', index) + "," + codeVotes.internallyGetValue('s2', index))
 		
 	} else { // Other Error
 	
@@ -109,8 +110,8 @@ for (def index : (0..codeVotes.getRowNumbers() - 1)) {
 		def file = new File('\\\\' + resultDir + '\\Text\\Failed\\' + codeVoteGroup + '.html')
 		
 		file.text = pageSource
-	
-		result_vote_failed.append('\n'+codeVoteGroup)
+
+		result_vote_failed.append('\n'+codeVotes.internallyGetValue('s1', index) + "," + codeVotes.internallyGetValue('s2', index))
 		
 	}	
 	
