@@ -1,4 +1,4 @@
-Script only not all project folder
+Script only not project folder
 
 Configuration in Katalo project
 1. Config variable "s1" and "s2" (String default type) in Variables tab.
